@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Post-Secondary Path | BCIT Electrical Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #FFD600;
+      --yellow-dim: #c9a800;
+      --navy: #0A0E1A;
+      --navy-mid: #111827;
+      --navy-light: #1C2333;
+      --slate: #2D3752;
+      --white: #F4F6FF;
+      --muted: #8892AA;
+      --accent: #00C2FF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      z-index: 100;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,214,0,0.12);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 3px;
+      color: var(--yellow);
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 13px; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 120px 64px 80px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,194,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(255,214,0,0.06) 0%, transparent 60%),
+        linear-gradient(160deg, #0A0E1A 0%, #0d1220 50%, #0A0E1A 100%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--white) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--white) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .bolt {
+      position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
+      font-size: 320px; opacity: 0.03; line-height: 1;
+      font-family: 'Bebas Neue', sans-serif; color: var(--yellow);
+      animation: pulse 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes pulse { 0%,100% { opacity: 0.03; } 50% { opacity: 0.06; } }
+
+    .hero-content { position: relative; z-index: 2; max-width: 760px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,214,0,0.1); border: 1px solid rgba(255,214,0,0.25);
+      border-radius: 99px; padding: 6px 16px;
+      font-size: 11px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-tag::before { content: ''; font-size: 12px; }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 100px);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero-title .line2 { color: var(--yellow); }
+    .hero-subtitle {
+      margin-top: 28px; font-size: 17px; line-height: 1.7;
+      color: var(--muted); max-width: 560px;
+      font-weight: 300;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+    .hero-cta {
+      margin-top: 40px; display: flex; gap: 16px; flex-wrap: wrap;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+    .btn {
+      display: inline-block; padding: 14px 32px;
+      font-weight: 600; font-size: 14px; letter-spacing: 0.5px;
+      border-radius: 6px; text-decoration: none;
+      transition: transform 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: var(--yellow); color: var(--navy);
+      box-shadow: 0 4px 24px rgba(255,214,0,0.3);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 32px rgba(255,214,0,0.5); }
+    .btn-ghost {
+      background: transparent; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); }
+
+    .hero-stats {
+      position: absolute; bottom: 60px; right: 64px;
+      display: flex; gap: 40px;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 40px; color: var(--yellow); line-height: 1;
+    }
+    .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 64px; max-width: 1200px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 11px; font-weight: 600; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--yellow);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--yellow); opacity: 0.4; }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(36px, 5vw, 60px);
+      letter-spacing: 1px; line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .section-intro {
+      font-size: 16px; line-height: 1.8; color: var(--muted);
+      max-width: 640px; margin-bottom: 60px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,214,0,0.2), transparent);
+      margin: 0;
+    }
+
+    /* ── WHY BCIT ── */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: rgba(255,214,0,0.05);
+      border: 1px solid rgba(255,214,0,0.1);
+      border-radius: 12px; overflow: hidden;
+    }
+    .why-card {
+      background: var(--navy-light);
+      padding: 40px;
+      transition: background 0.2s;
+    }
+    .why-card:hover { background: var(--slate); }
+    .why-icon { display:none; font-size: 32px; margin-bottom: 16px; }
+    .why-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; letter-spacing: 1px;
+      color: var(--yellow); margin-bottom: 10px;
+    }
+    .why-card p { font-size: 14px; line-height: 1.7; color: var(--muted); }
+
+    /* ── ABOUT ── */
+    .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .about-text p {
+      font-size: 15px; line-height: 1.9; color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .about-text p strong { color: var(--white); font-weight: 500; }
+    .about-callout {
+      background: var(--navy-light);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-top: 32px;
+    }
+    .about-callout p { font-size: 15px; color: var(--white); margin: 0; line-height: 1.6; }
+    .known-for { margin-top: 0; }
+    .known-tag {
+      display: inline-block;
+      background: rgba(0,194,255,0.08);
+      border: 1px solid rgba(0,194,255,0.2);
+      color: var(--accent);
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.5px; padding: 6px 14px;
+      border-radius: 99px; margin: 4px;
+    }
+    .known-header {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px; color: var(--yellow);
+      margin-bottom: 16px; letter-spacing: 1px;
+    }
+
+    /* ── COSTS ── */
+    .costs-wrap {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-bottom: 48px;
+    }
+    .cost-card {
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 32px 28px;
+      position: relative; overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .cost-card:hover { transform: translateY(-4px); border-color: rgba(255,214,0,0.2); }
+    .cost-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0;
+      height: 3px; background: linear-gradient(90deg, var(--yellow), var(--accent));
+    }
+    .cost-year {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--muted); margin-bottom: 12px;
+    }
+    .cost-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 44px; color: var(--yellow); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .cost-sub { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+    .cost-detail {
+      font-size: 13px; color: var(--muted); line-height: 1.6;
+    }
+    .cost-note {
+      background: rgba(0,194,255,0.06);
+      border: 1px solid rgba(0,194,255,0.15);
+      border-radius: 8px; padding: 20px 24px;
+      font-size: 13px; color: var(--muted); line-height: 1.7;
+    }
+    .cost-note strong { color: var(--accent); }
+
+    /* ── 2 YEAR PLAN ── */
+    .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .plan-year {
+      background: var(--navy-light);
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .plan-header {
+      background: linear-gradient(135deg, var(--slate), var(--navy-mid));
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(255,214,0,0.15);
+    }
+    .plan-header h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px; letter-spacing: 2px; color: var(--yellow);
+    }
+    .plan-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .plan-courses { padding: 24px 32px; }
+    .term-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px; color: var(--accent);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin: 20px 0 12px;
+    }
+    .term-label:first-child { margin-top: 0; }
+    .course-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .course-item:last-child { border-bottom: none; }
+    .course-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--yellow); margin-top: 6px; flex-shrink: 0;
+    }
+    .course-name { font-size: 13px; color: var(--white); line-height: 1.5; }
+    .course-code { font-size: 11px; color: var(--muted); font-family: 'Space Mono', monospace; }
+
+    /* ── DEAN ── */
+    .dean-card {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 48px; align-items: start;
+      background: var(--navy-light);
+      border-radius: 16px; padding: 48px;
+      border: 1px solid rgba(255,214,0,0.1);
+      position: relative; overflow: hidden;
+    }
+    .dean-card::after {
+      content: '"';
+      position: absolute; right: 40px; top: 20px;
+      font-size: 160px; color: rgba(255,214,0,0.04);
+      font-family: serif; line-height: 1;
+    }
+    .dean-avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--slate), var(--navy));
+      border: 3px solid rgba(255,214,0,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; flex-shrink: 0;
+    }
+    .dean-title {
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 8px;
+    }
+    .dean-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px; letter-spacing: 1px; margin-bottom: 4px;
+    }
+    .dean-role { font-size: 14px; color: var(--accent); margin-bottom: 24px; }
+    .dean-bio { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .dean-creds {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+    }
+    .cred-pill {
+      background: rgba(255,214,0,0.08);
+      border: 1px solid rgba(255,214,0,0.15);
+      color: var(--yellow);
+      font-size: 11px; font-weight: 600;
+      padding: 4px 12px; border-radius: 99px;
+    }
+
+    .assoc-dean-row {
+      margin-top: 32px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+    .assoc-card {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 24px;
+    }
+    .assoc-card .role { font-size: 11px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+    .assoc-card .name { font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .assoc-card .creds-small { font-size: 12px; color: var(--accent); }
+
+    /* ── VALUES ── */
+    .values-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .value-card {
+      padding: 36px 28px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: var(--navy-light);
+      position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .value-card:hover { border-color: rgba(255,214,0,0.2); transform: translateY(-4px); }
+    .value-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 72px; color: rgba(255,214,0,0.06);
+      position: absolute; top: -10px; right: 16px;
+      line-height: 1;
+    }
+    .value-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; letter-spacing: 1px;
+      color: var(--yellow); margin-bottom: 12px;
+    }
+    .value-card p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── CLUBS ── */
+    .clubs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .club-card {
+      display: flex; gap: 20px; align-items: flex-start;
+      background: var(--navy-light);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .club-card:hover { border-color: rgba(0,194,255,0.2); }
+    .club-icon { display:none;
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(0,194,255,0.08);
+      border-radius: 10px; font-size: 22px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .club-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--white); }
+    .club-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── EXTRACURRICULAR ── */
+    .extra-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+    .extra-card {
+      background: var(--navy-light); border-radius: 10px; padding: 28px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .extra-card .icon { display:none; font-size: 28px; margin-bottom: 16px; }
+    .extra-card h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
+    .extra-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-mid);
+      border-top: 1px solid rgba(255,214,0,0.08);
+      padding: 60px 64px;
+      text-align: center;
+    }
+    footer .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px; letter-spacing: 4px; color: var(--yellow);
+      margin-bottom: 12px;
+    }
+    footer p { font-size: 13px; color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 60px 24px; }
+      .hero { padding: 100px 24px 80px; }
+      .bolt { display: none; }
+      .hero-stats { position: relative; bottom: auto; right: auto; margin-top: 40px; justify-content: flex-start; }
+      .why-grid, .about-layout, .plan-grid, .values-grid,
+      .assoc-dean-row, .clubs-list, .extra-grid, .costs-wrap { grid-template-columns: 1fr; }
+      .dean-card { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">My Post-Secondary Path</div>
+    <ul class="nav-links">
+      <li><a href="#why">Why BCIT</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#trade">Electrical Trade</a></li>
+      <li><a href="#costs">Costs</a></li>
+      <li><a href="#plan">2-Year Plan</a></li>
+      <li><a href="#dean">Leadership</a></li>
+      <li><a href="#values">Values</a></li>
+      <li><a href="#clubs">Clubs</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div style="position:relative;">
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <div class="hero-grid"></div>
+      <div class="bolt"></div>
+      <div class="hero-content">
+        <div class="hero-tag">Post-Secondary Education Plan</div>
+        <h1 class="hero-title">
+          BCIT<br>
+          <span class="line2">Electrical</span><br>
+          Engineering
+        </h1>
+        <p class="hero-subtitle">
+          Bachelor of Engineering — School of Energy, Burnaby Campus.<br>
+          A four-year path to powering British Columbia's future — and a career at BC Hydro.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#about">Explore the Program</a>
+          <a class="btn btn-ghost" href="#plan">View 2-Year Plan</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">97%</div>
+          <div class="stat-label">Grad Employment Rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4 YR</div>
+          <div class="stat-label">Degree Program</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$33.9K</div>
+          <div class="stat-label">Total Program Cost</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHY BCIT -->
+  <section id="why">
+    <div class="section-label">My Choice</div>
+    <h2 class="section-title">Why I Chose BCIT</h2>
+    <p class="section-intro">After researching universities across British Columbia, BCIT stood out as the clear choice for Electrical Engineering — here's why.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>Industry-First Education</h3>
+        <p>BCIT is built differently from traditional universities. Instructors come from the field — they've worked as engineers and technicians, which means every lecture connects directly to real-world application. BCIT graduates have a reputation for being productive from day one on the job.</p>
+      </div>
+      <div class="why-card">
+        <h3>Flexible Pathway</h3>
+        <p>BCIT's unique structure lets me start in the common first year shared between the ECET Diploma and the BEng degree. After Year 1, I can compete for a seat in the full engineering degree — or exit with a diploma. This flexibility reduces risk while keeping the ceiling high.</p>
+      </div>
+      <div class="why-card">
+        <h3>Direct BC Hydro Connection</h3>
+        <p>BC Hydro has a long-standing hiring relationship with BCIT graduates. The CPC Technologist Trainee Program at BC Hydro specifically requires an Electrical/Electronics Engineering Technology diploma from an accredited institution — making BCIT the most direct route to that career goal.</p>
+      </div>
+      <div class="why-card">
+        <h3>Team-Based Learning</h3>
+        <p>BCIT's project-based curriculum means working in teams throughout the program — designing, building, and testing real systems. This suits the way I work best: collaborating with others toward a shared goal, not studying in isolation.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">The Institution</div>
+    <h2 class="section-title">About BCIT</h2>
+    <div class="about-layout">
+      <div class="about-text">
+        <p>The <strong>British Columbia Institute of Technology (BCIT)</strong> is a public polytechnic institute located on a large Burnaby campus adjacent to Deer Lake. Founded in 1964, BCIT has grown into one of Canada's most respected technical institutions, with over <strong>44,000 students enrolled annually</strong> and more than 210,000 alumni.</p>
+        <p>Unlike a traditional university, BCIT is a polytechnic — meaning its entire mission centers on applied, hands-on education. Every program is designed to put graduates directly to work. BCIT runs five campuses across Metro Vancouver, including the main Burnaby campus where Electrical Engineering is housed.</p>
+        <p>BCIT's Electrical Engineering degree is <strong>nationally accredited by the Canadian Engineering Accreditation Board (CEAB)</strong> and recognized as a baccalaureate degree by the BC Ministry of Advanced Education — ensuring the credential is respected by employers and licensing bodies across Canada.</p>
+        <div class="about-callout">
+          <p>  <strong>97% of BCIT graduates find relevant employment within their field.</strong> This is one of the highest rates of any post-secondary institution in Canada, and reflects the depth of industry connections BCIT maintains.</p>
+        </div>
+      </div>
+      <div class="known-for">
+        <div class="known-header">// BCIT IS KNOWN FOR</div>
+        <div>
+          <span class="known-tag">Applied Technical Education</span>
+          <span class="known-tag">Industry-Connected Faculty</span>
+          <span class="known-tag">Trades & Engineering</span>
+          <span class="known-tag">Co-op Programs</span>
+          <span class="known-tag">CEAB Accredited Engineering</span>
+          <span class="known-tag">97% Employment Rate</span>
+          <span class="known-tag">BC Hydro Pipeline</span>
+          <span class="known-tag">Aerospace Campus</span>
+          <span class="known-tag">Health Sciences</span>
+          <span class="known-tag">Applied Research</span>
+          <span class="known-tag">Polytechnic Model</span>
+          <span class="known-tag">Small Class Sizes</span>
+          <span class="known-tag">44,000+ Students</span>
+          <span class="known-tag">Capstone Industry Projects</span>
+        </div>
+        <br>
+        <div class="known-header" style="margin-top:24px;">// THE PROGRAM</div>
+        <p style="font-size:13px; color:var(--muted); line-height:1.8;">
+          The <strong style="color:var(--white)">Bachelor of Engineering in Electrical Engineering</strong> is a four-year full-time program delivered in-person at BCIT Burnaby. The first year is shared with the ECET Diploma, giving students an entry point and a decision moment. The program covers power systems, electronics, control systems, communications, and engineering mathematics — with a 4-month workplace education (co-op) experience embedded before graduation.
+        </p>
+        <br>
+        <p style="font-size:13px; color:var(--muted); line-height:1.8;">
+          In final year, every student completes a <strong style="color:var(--white)">capstone engineering design project</strong> — often sponsored by a real industry partner. This is the hands-on, team-based experience that defines the BCIT difference.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ELECTRICAL TRADE -->
+  <section id="trade">
+    <div class="section-label">High School Head Start</div>
+    <h2 class="section-title">Electrical Level 1 — Secondary School Apprenticeship</h2>
+    <p class="section-intro">Before even starting at BCIT, I am completing my Electrical Level 1 trade certification through BC's Secondary School Apprenticeship (SSA) program — for free, while still in high school.</p>
+
+    <div class="about-layout">
+      <div class="about-text">
+        <p>The <strong>Secondary School Apprenticeship (SSA) program</strong> is a BC government initiative that allows high school students to begin a formal trade apprenticeship while completing their diploma. Students log real on-the-job hours with a certified employer and complete Level 1 trade school training at no cost — the program is fully funded.</p>
+        <p>For the <strong>Electrical trade</strong>, Level 1 covers the fundamentals of electrical theory, wiring methods, the BC Electrical Code, tools and safety, and basic installation work. These are real, transferable skills that directly complement the theoretical side of the BCIT Electrical Engineering degree.</p>
+        <p>Upon completing Level 1, those hours are <strong>officially registered with SkilledTradesBC</strong> and count toward a Journeyman Electrician ticket if I choose to pursue it later in my career. The credential doesn't expire and doesn't disappear — it stays on your record permanently.</p>
+        <div class="about-callout">
+          <p>  <strong>Most BCIT engineering students arrive with zero trade experience.</strong> Arriving with Electrical Level 1 already completed signals to BCIT — and future employers like BC Hydro — that I understand electrical work from the ground up, not just from a textbook.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="known-header">// WHY THIS MATTERS</div>
+        <div class="why-grid" style="grid-template-columns:1fr; gap:2px; margin-bottom:0;">
+          <div class="why-card" style="padding:28px 32px;">
+                <h3>Completely Free</h3>
+            <p>The SSA program is fully government-funded. Level 1 trade training that would normally cost hundreds of dollars is covered entirely — making this one of the smartest financial decisions available to a BC high school student.</p>
+          </div>
+          <div class="why-card" style="padding:28px 32px;">
+                <h3>Resume Advantage</h3>
+            <p>Graduating engineers who also hold a trade credential are rare. It demonstrates initiative, hands-on experience, and a deeper understanding of the work — exactly what BC Hydro looks for when hiring new engineers and CPC Technologist Trainees.</p>
+          </div>
+          <div class="why-card" style="padding:28px 32px;">
+                <h3>Built-In Backup Plan</h3>
+            <p>If I ever want to work in the electrical field before finishing my degree — during a gap year, to save money, or for any other reason — Level 1 plus logged apprenticeship hours means I can find paid electrical work immediately.</p>
+          </div>
+          <div class="why-card" style="padding:28px 32px;">
+                <h3>Future Upgrade Path</h3>
+            <p>Those hours count toward a Red Seal Journeyman Electrician ticket later in my career if I ever want it. Engineers with a trade ticket command more respect on job sites and can move into roles that purely academic engineers cannot access.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="costs">
+    <div class="section-label">Financials</div>
+    <h2 class="section-title">Program Costs</h2>
+    <p class="section-intro">BCIT uses a per-term tuition model rather than per-credit. Here is an estimated cost breakdown for the Electrical Engineering program for domestic students.</p>
+    <div class="costs-wrap">
+      <div class="cost-card">
+        <div class="cost-year">Year 1 — Terms 1 & 2 (ECET Common Year)</div>
+        <div class="cost-amount">$7,515</div>
+        <div class="cost-sub">$3,757.59 per term</div>
+        <div class="cost-detail">Term 1 and Term 2 are each $3,221.31 in tuition + $419.30 in student fees + $116.98 in other fees = <strong>$3,757.59/term</strong>. This covers the ECET Common First Year shared with the diploma stream.</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-year">Year 2–4 — Terms 3–8 (BEng Degree)</div>
+        <div class="cost-amount">$8,506</div>
+        <div class="cost-sub">$4,253.01 per term</div>
+        <div class="cost-detail">Once in the BEng degree stream, each term costs $3,702.98 in tuition + $419.30 in student fees + $130.73 in other fees = <strong>$4,253.01/term</strong>. Six terms total across Years 2, 3, and 4.</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-year">Mandatory Work Term (Co-op)</div>
+        <div class="cost-amount">$861</div>
+        <div class="cost-sub">one-time fee during co-op</div>
+        <div class="cost-detail">The mandatory 4-month workplace education term costs $578.01 + $283.15 in fees = <strong>$861.16 total</strong>. During this term you are working and earning a salary — this fee is a registration cost only, not tuition.</div>
+      </div>
+    </div>
+    <div class="cost-note">
+      <strong>Full Program Total: $33,894.40 CAD</strong> — broken down as $29,238.51 in tuition + $3,637.55 in student fees + $1,018.34 in other fees. This is the actual published cost for the complete Bachelor of Engineering in Electrical Engineering program for domestic students. Living expenses in Burnaby average approximately $10,400/year on top of this. Financial aid, bursaries, and the BC Student Loan program are available, and the co-op work term generates income that helps offset overall costs.
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 2-YEAR PLAN -->
+  <section id="plan">
+    <div class="section-label">Academic Roadmap</div>
+    <h2 class="section-title">First Two Years — Course Plan</h2>
+    <p class="section-intro">The first year is the ECET Common Year shared with all diploma streams. After completing it with a 75%+ average, I compete for a seat in Level 3 of the BEng program.</p>
+    <div class="plan-grid">
+
+      <div class="plan-year">
+        <div class="plan-header">
+          <h3>Year One</h3>
+          <p>ECET Common First Year — Diploma Entry (Levels 1 & 2)</p>
+        </div>
+        <div class="plan-courses">
+          <div class="term-label">// Term 1 — September to December</div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">DC Circuit Theory</div><div class="course-code">ELEX 1105</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Mathematics for Technology 1</div><div class="course-code">MATH 1115</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Electronic Devices & Circuits 1</div><div class="course-code">ELEX 1125</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Technical Communications</div><div class="course-code">COMM 1105</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Computer Programming for Technology</div><div class="course-code">COMP 1113</div></div>
+          </div>
+
+          <div class="term-label">// Term 2 — January to April</div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">AC Circuit Theory</div><div class="course-code">ELEX 1205</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Mathematics for Technology 2</div><div class="course-code">MATH 1215</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Electronic Devices & Circuits 2</div><div class="course-code">ELEX 1225</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Digital Logic Circuits</div><div class="course-code">ELEX 1215</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Physics for Technology</div><div class="course-code">PHYS 1215</div></div>
+          </div>
+
+          <div class="term-label">// Spring Block — April to May</div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Instrumentation & Measurements</div><div class="course-code">ELEX 1405</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="plan-year">
+        <div class="plan-header">
+          <h3>Year Two</h3>
+          <p>BEng Electrical Engineering — Degree Entry (Levels 3 & 4)</p>
+        </div>
+        <div class="plan-courses">
+          <div class="term-label">// Term 3 — September to December</div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Calculus for Engineers</div><div class="course-code">MATH 2410</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Signals & Systems</div><div class="course-code">ELEX 3115</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Electromagnetic Theory</div><div class="course-code">ELEX 3125</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Engineering Communication</div><div class="course-code">COMM 3310</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Microprocessors & Embedded Systems</div><div class="course-code">ELEX 3155</div></div>
+          </div>
+
+          <div class="term-label">// Term 4 — January to April</div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Linear Algebra for Engineers</div><div class="course-code">MATH 2440</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Electric Machines & Power Systems</div><div class="course-code">ELEX 4125</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Control Systems 1</div><div class="course-code">ELEX 4155</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">Power Electronics</div><div class="course-code">ELEX 4175</div></div>
+          </div>
+          <div class="course-item">
+            <div class="course-dot"></div>
+            <div><div class="course-name">General Education Elective — Psychology</div><div class="course-code">LIBS — Social Science · one 3-credit course · approved by Program Head Victor Mendez</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DEAN -->
+  <section id="dean">
+    <div class="section-label">School Leadership</div>
+    <h2 class="section-title">Dean & Program Leadership</h2>
+    <p class="section-intro">The School of Energy at BCIT is led by experienced engineers and educators with deep connections to the industry I want to enter.</p>
+
+    <div class="dean-card">
+      <div class="dean-avatar"><img src="https://canadagaslng.com/media/6708/andrea-frisque-new-300x300.jpg" alt="Dr. Andrea Frisque" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"></div>
+      <div>
+        <div class="dean-title">Dean — School of Energy</div>
+        <div class="dean-name">Dr. Andrea Frisque</div>
+        <div class="dean-role">Dean, School of Energy · BCIT</div>
+        <div class="dean-bio">
+          Dr. Andrea Frisque is the Dean of the School of Energy at BCIT — the school that directly houses the Electrical Engineering & Technology department and the Bachelor of Engineering program I plan to enter. The School of Energy encompasses BCIT's engineering, technology, and trades programs focused on power, energy, and infrastructure systems. As Dean, Dr. Frisque oversees the academic direction, industry partnerships, and student experience across all programs in the school. Her leadership reflects BCIT's core commitment to applied, industry-connected education that prepares graduates for real careers in BC's growing energy sector.
+        </div>
+        <div class="dean-creds">
+          <span class="cred-pill">Dean, School of Energy</span>
+          <span class="cred-pill">BCIT Senior Leadership</span>
+          <span class="cred-pill">Engineering & Technology</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="assoc-dean-row">
+      <div class="assoc-card">
+        <div class="role">Associate Dean — Electrical Engineering & Technology</div>
+        <div class="name">Viktoriia Kovalova</div>
+        <div class="creds-small">Directly oversees the BEng Electrical Engineering program</div>
+      </div>
+      <div class="assoc-card">
+        <div class="role">Program Head — Electrical Engineering</div>
+        <div class="name">Victor Mendez</div>
+        <div class="creds-small">Day-to-day program leadership · approves GEE elective selections</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VALUES -->
+  <section id="values">
+    <div class="section-label">Mission & Principles</div>
+    <h2 class="section-title">Values of BCIT & School of Energy</h2>
+    <p class="section-intro">BCIT's institutional identity is built on a set of principles that distinguish it from conventional universities. These values directly informed my choice.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3>Applied Learning</h3>
+        <p>Every program at BCIT is grounded in real-world application. Theory exists to enable practice — not the other way around. Students leave with hands-on skills employers can use immediately, not just academic credentials.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h3>Industry Integration</h3>
+        <p>BCIT maintains deep relationships with BC's largest employers including BC Hydro, Telus, and major engineering firms. Faculty are practitioners. Capstone projects are often industry-sponsored. Connections to employment begin on day one.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h3>Collaboration</h3>
+        <p>The School of Energy is built around the belief that great outcomes come from engineers, technologists, and tradespeople working together. Programs are deliberately structured to reflect integrated, team-based work environments.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">04</div>
+        <h3>Lifelong Learning</h3>
+        <p>BCIT fosters a commitment to continuous growth — evidenced by its own leadership pursuing multiple advanced degrees while working. Part-time and flexible learning options allow professionals to keep upgrading throughout their careers.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">05</div>
+        <h3>Sustainability</h3>
+        <p>The School of Energy plays a central role in BC's clean energy future. The programs are aligned with Industry 4.0, digital transformation, and smart grid systems — preparing graduates to lead the transition to sustainable power infrastructure.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">06</div>
+        <h3>Inclusion & Diversity</h3>
+        <p>BCIT serves over 44,000 students from more than 120 countries and actively supports Indigenous professionals through dedicated development programs. The institution is committed to building an engineering workforce that reflects the diversity of BC.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CLUBS -->
+  <section id="clubs">
+    <div class="section-label">Campus Life</div>
+    <h2 class="section-title">Groups, Clubs & Extracurriculars</h2>
+    <p class="section-intro">BCIT has nearly 40 student clubs and a range of extracurricular opportunities. For an engineering student, several are particularly valuable for networking, skill-building, and industry connection.</p>
+
+    <div class="clubs-list">
+      <div class="club-card">
+        <div>
+          <h4>IEEE BCIT Student Branch</h4>
+          <p>The Institute of Electrical and Electronics Engineers is the world's largest professional association for electrical and tech professionals. BCIT's student branch is open to Electrical and Computer Engineering students and provides direct networking with the professional engineering community, access to technical resources, and industry events.</p>
+        </div>
+      </div>
+      <div class="club-card">
+        <div>
+          <h4>BCIT Robotics Club</h4>
+          <p>A team of engineering and robotics enthusiasts who love designing and building bots. For an electrical engineering student with an interest in systems and automation, this club offers hands-on project experience outside the classroom — directly complementary to the power and control systems curriculum.</p>
+        </div>
+      </div>
+      <div class="club-card">
+        <div>
+          <h4>Engineers Without Borders</h4>
+          <p>EWB BCIT connects students to global engineering challenges. Members work on humanitarian and development engineering projects, building skills in cross-cultural collaboration, sustainable design, and community-centered problem solving — skills that translate directly to team leadership in engineering environments.</p>
+        </div>
+      </div>
+      <div class="club-card">
+        <div>
+          <h4>BCIT Engineering Students' Society (ESS)</h4>
+          <p>The ESS represents engineering students across all programs, organizes the annual Western Engineering Competition, coordinates networking events with industry, and advocates for student interests within the School of Energy. Joining early builds visibility and connections before graduation.</p>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="section-label" style="margin-top:48px">Extracurricular Learning</div>
+    <h3 style="font-family:'Bebas Neue',sans-serif; font-size:32px; letter-spacing:1px; margin-bottom:20px;">Beyond the Classroom</h3>
+    <div class="extra-grid">
+      <div class="extra-card">
+        <h4>Co-op Work Experience</h4>
+        <p>A mandatory 4-month paid work term is embedded in the BEng program. Students apply to work with BC Hydro, Fortis BC, BC Transit, Telus, and other major employers. This is the most direct path to a job offer upon graduation — and it costs only $861 in registration fees while you earn a salary.</p>
+      </div>
+      <div class="extra-card">
+        <h4>Applied Research Projects</h4>
+        <p>BCIT's applied research centre (MAKE+) lets students participate in industry-funded research. For electrical engineering students this means working on real power systems, smart grid, and control challenges with faculty and industry partners — directly relevant to a BC Hydro career path.</p>
+      </div>
+      <div class="extra-card">
+        <h4>VEX Robotics Competition</h4>
+        <p>BCIT students can participate in the VEX Robotics Competition, building and programming competitive robots. For an electrical engineering student with an interest in systems and automation, this is hands-on project experience that complements the control systems curriculum directly.</p>
+      </div>
+      <div class="extra-card">
+        <h4>Western Engineering Competition</h4>
+        <p>An annual multi-day event where engineering students from across Western Canada compete in design, consulting, and problem-solving challenges. BCIT sends teams every year. Competing builds presentation skills, engineering thinking under pressure, and a network across the industry.</p>
+      </div>
+      <div class="extra-card">
+        <h4>Recreation & Intramural Sports</h4>
+        <p>BCIT Recreation Services provides access to a gym and fitness centre in SE16, fitness classes, and organized intramural sports leagues. A healthy way to decompress during a demanding engineering program and meet students from other departments.</p>
+      </div>
+      <div class="extra-card">
+        <h4>Enactus BCIT</h4>
+        <p>A student entrepreneurship organization that works on applied community impact projects. Members develop real skills in project management, leadership, and communication — all directly valuable for an engineer aiming toward team leadership and project management roles at BC Hydro.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">BCIT — ELECTRICAL ENGINEERING</div>
+    <p style="margin-bottom:8px;">Bachelor of Engineering · School of Energy · Burnaby, British Columbia</p>
+    <p>Post-Secondary Education Research Assignment &nbsp;·&nbsp; Abbotsford Secondary &nbsp;·&nbsp; 2026</p>
+  </footer>
+
+</body>
+</html>
